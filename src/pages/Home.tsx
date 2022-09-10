@@ -1,8 +1,8 @@
 // Global containers
 import Home from "../containers/Home";
 
-const HomePage = () => {
+const index = () => {
   return <Home />;
 };
 
-export default HomePage;
+export { index as Home };

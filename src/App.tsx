@@ -1,6 +1,9 @@
 // React router dom
 import { BrowserRouter as Router } from "react-router-dom";
-import Layout from "./containers/layout/Layout";
+
+// Global components
+import Layout from "./components/layout/Layout";
+import { Store } from "./context/theme";
 
 // Global routes
 import Routes from "./router/Routes";
@@ -8,9 +11,11 @@ import Routes from "./router/Routes";
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes />
-      </Layout>
+      <Store>
+        <Layout>
+          <Routes />
+        </Layout>
+      </Store>
     </Router>
   );
 }

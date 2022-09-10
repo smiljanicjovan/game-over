@@ -1,17 +1,31 @@
+// Core types
+import type { FC } from "react";
+
+// Core
 import { useEffect, useState } from "react";
+
+// Global utils
 import { fetchAllGames } from "../../utils/fetchAllGames";
 
-const Home = () => {
+// Global types
+import { Game } from "../../types/game";
+
+// Vendors
+import styled, { css } from "styled-components";
+
+const Wrapper = styled.div`
+  ${({ theme: { defaults, colors, font, ...theme } }) => css``}
+`;
+
+interface Hometype {}
+
+const Home: FC<Hometype> = () => {
   const [page, setPage] = useState(1);
-  const [game, setGame] = useState();
+  const [games, setGames] = useState<Game[]>();
 
   useEffect(() => {
     (async () => {
-      const games = await fetchAllGames(page);
-      const allGames = games.map((game: any) => game.name);
-      console.log(allGames);
-
-      setGame(allGames);
+      setGames(await fetchAllGames(page));
     })();
   }, [page]);
 
@@ -24,11 +38,14 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <Wrapper>
       <button onClick={previousPage}>Previous Page</button>
-      <h1>{game}</h1>
+
+      {Array.isArray(games) &&
+        games.map((game) => <h1 key={game.name}>{game.name}</h1>)}
+
       <button onClick={nextPage}>Next Page</button>
-    </div>
+    </Wrapper>
   );
 };
 

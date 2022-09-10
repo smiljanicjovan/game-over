@@ -2,14 +2,16 @@
 import { Routes as RoutesWrap, Route } from "react-router-dom";
 
 // Global pages
-import HomePage from "../pages/Home";
-import AboutUsPage from "../pages/About";
+import { Home, AboutUs, BestSellers, Platforms, Search } from "../pages";
 
 const Routes = () => {
   return (
     <RoutesWrap>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about-us" element={<AboutUsPage />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/bestsellers" element={<BestSellers />} />
+      <Route path="/platforms" element={<Platforms />} />
+      <Route path="/Search" element={<Search />} />
     </RoutesWrap>
   );
 };

@@ -1,0 +1,60 @@
+{
+  "Create a Functional Component": {
+    "prefix": "fc",
+    "body": [
+      "// Core types",
+      "import type { FC } from \"react\"",
+      "",
+      "const <$1>: FC<$2> = () => {",
+      "  return <>$3</>",
+      "}",
+      "",
+      "export { index as $4 }"
+    ]
+  },
+
+  "Create a Local Functional Component": {
+    "prefix": "lfc",
+    "body": ["const $1: FC<{}> = () => {", "  return <>$2</>", "}", ""]
+  },
+
+  "Create a Styled Functional Component": {
+    "prefix": "sfc",
+    "body": [
+      "// Core types",
+      "import type { FC } from \"react\"",
+      "",
+      "// Vendors",
+      "import styled, {css} from \"styled-components\"",
+      "",
+      "const $3 = styled.div`",
+      "  ",
+      "  ${({theme: {defaults, colors, font, ...theme}}) => css`",
+      "    ",
+      "  `}",
+      "`",
+      "",
+      "interface $1type {",
+      "  ",
+      "}",
+      "",
+      "const $1: FC<$1type> = () => {",
+      "  return <$3>$4</$3>",
+      "}",
+      "",
+      "export default $1"
+    ]
+  },
+
+  "Create a Styled Component": {
+    "prefix": "sc",
+    "body": [
+      "const $1 = styled.$2`",
+      "$3",
+      "  ${({theme: {defaults, colors, font, ...theme}}) => css`",
+      "    ",
+      "  `}",
+      "`"
+    ]
+  }
+}

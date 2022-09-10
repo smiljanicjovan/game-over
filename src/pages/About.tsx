@@ -1,8 +1,8 @@
 // Global containers
-import About from "../containers/About";
+import AboutUs from "../containers/AboutUs";
 
-const AboutUsPage = () => {
-  return <About />;
+const index = () => {
+  return <AboutUs />;
 };
 
-export default AboutUsPage;
+export { index as AboutUs };
