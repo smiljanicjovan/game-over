@@ -5,7 +5,7 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 // Global utils
-import { fetchAllGames } from "../../utils/fetchAllGames";
+import { fetchItems } from "../../utils/fetchItems";
 
 // Global types
 import { Game } from "../../types/game";
@@ -25,7 +25,7 @@ const Home: FC<Hometype> = () => {
 
   useEffect(() => {
     (async () => {
-      setGames(await fetchAllGames(page));
+      setGames(await fetchItems(page, "games"));
     })();
   }, [page]);
 
@@ -39,12 +39,13 @@ const Home: FC<Hometype> = () => {
 
   return (
     <Wrapper>
-      <button onClick={previousPage}>Previous Page</button>
+      <>
+        <button onClick={previousPage}>Previous Page</button>
 
-      {Array.isArray(games) &&
-        games.map((game) => <h1 key={game.name}>{game.name}</h1>)}
+        {/* {Array.isArray(games) && games.map((game) => console.log(game))} */}
 
-      <button onClick={nextPage}>Next Page</button>
+        <button onClick={nextPage}>Next Page</button>
+      </>
     </Wrapper>
   );
 };

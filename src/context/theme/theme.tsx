@@ -13,13 +13,16 @@ const defaultTheme: ThemeType = {
   colors: {
     white: "#ffffff",
     black: "#000000",
+    background: "#272727",
+    darkBackground: "#101010",
     primary: "#208DD0",
     secondary: "#6569D6",
+    textColor: "#ffffff",
   },
   font: {
     size: 16,
     baseSize: 20,
-    family: "'Montserrat', sans-serif",
+    family: "'Roboto', sans-serif",
     weight: {
       light: 300,
       regular: 400,

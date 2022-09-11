@@ -2,14 +2,14 @@
 import type { FC } from "react";
 
 // Local components
-import Header from "./Header";
-import Footer from "./Footer";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 interface Layouttypes {
   children: React.ReactNode;
 }
 
-const Layout: FC<Layouttypes> = ({ children }) => {
+const index: FC<Layouttypes> = ({ children }) => {
   return (
     <>
       <Header />
@@ -19,4 +19,4 @@ const Layout: FC<Layouttypes> = ({ children }) => {
   );
 };
 
-export default Layout;
+export { index as Layout };

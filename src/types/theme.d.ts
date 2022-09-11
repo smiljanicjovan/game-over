@@ -10,8 +10,11 @@ export interface Theme {
   colors: {
     white: string;
     black: string;
+    background: string;
+    darkBackground: string;
     primary: string;
     secondary: string;
+    textColor: string;
   };
   font: {
     size: number;

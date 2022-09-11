@@ -3,6 +3,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
+// Global context
+import { Store } from "./context/theme";
+
 // Global styles
 import GlobalStyle from "./styles/globalStyles";
 
@@ -12,7 +15,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <Store>
+      <GlobalStyle />
+      <App />
+    </Store>
   </React.StrictMode>
 );

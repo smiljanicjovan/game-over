@@ -62,6 +62,7 @@ type Tags = {
   name: string;
   slug: string;
 };
+
 export interface Game {
   added: number;
   added_by_status: {
