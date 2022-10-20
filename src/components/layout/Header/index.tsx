@@ -13,11 +13,14 @@ import Platform from "./Platform";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: f;ex-start;
+  align-items: center;
   padding: 20px 0;
+  position: absolute;
+  width: 100%;
 
   ${({ theme: { defaults, colors, font, breakpoints } }) => css`
-    background-color: ${colors.darkBackground};
+    background-color: transparent;
+
     padding-left: ${defaults.gutter * 1.25}px;
     padding-right: ${defaults.gutter * 1.25}px;
 
@@ -53,10 +56,10 @@ const NavLinks = styled.div`
 
 const Platforms = styled.div`
   display: flex;
-
-  border: 1px solid white;
   border-radius: 50px;
   padding: 10px;
+  backdrop-filter: blur(60px) saturate(100%);
+  background-color: rgba(39, 39, 39, 0.25);
 `;
 
 const PlatformIcon = styled.svg`
@@ -111,10 +114,6 @@ const index = () => {
       path: "/about-us",
     },
     {
-      name: "Platforms",
-      path: "/platforms",
-    },
-    {
       name: "Bestsellers",
       path: "/bestsellers",
     },
@@ -131,14 +130,14 @@ const index = () => {
       </Link>
 
       <div>
-        <NavLinks>
+        {/* <NavLinks>
           {Array.isArray(navigation) &&
             navigation.map((link) => (
               <Link key={link.path} to={link.path}>
                 {link.name}
               </Link>
             ))}
-        </NavLinks>
+        </NavLinks> */}
 
         <Platforms>
           {Array.isArray(platforms) &&

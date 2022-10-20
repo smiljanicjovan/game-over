@@ -1,5 +1,5 @@
 // Core types
-import type { FC } from "react";
+import { FC, useRef } from "react";
 
 // Core
 import { useEffect, useState } from "react";
@@ -10,7 +10,8 @@ import styled, { css } from "styled-components";
 import { Platform as Platformstype } from "../../../types/platform";
 
 // Global utils
-import { fetchItems } from "../../../utils/fetchItems";
+import { fetchPlatforms } from "../../../utils/fetchItems";
+import { useOutsideCansler } from "../../../utils/handleClickOutside";
 
 interface Platformtype {
   singlePlatform: {
@@ -45,21 +46,33 @@ const Dropdown = styled.div`
   top: 50px;
   left: 50%;
   transform: translate(-50%, 0);
-  border: 1px solid red;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  padding: 10px 0;
+
+  backdrop-filter: blur(60px) saturate(100%);
+  background-color: rgba(39, 39, 39, 0.95);
+  border-radius: 10px;
+`;
+
+const Item = styled.h6`
+  padding: 10px 0;
 `;
 
 const Platform: FC<Platformtype> = ({ singlePlatform }) => {
   const [platforms, setPlatforms] = useState<Platformstype[]>();
   const [showItems, setShowItems] = useState(false);
 
+  const wrapperRef = useRef(null);
+  useOutsideCansler(wrapperRef, setShowItems);
+
   useEffect(() => {
     (async () => {
-      setPlatforms(await fetchItems(1, "platforms"));
+      setPlatforms(await fetchPlatforms());
     })();
   }, []);
 
@@ -87,13 +100,16 @@ const Platform: FC<Platformtype> = ({ singlePlatform }) => {
           />
         </svg>
       </Name>
+
       {showItems && (
-        <Dropdown>
-          {platform?.map((singlePlatform) => (
-            <Link key={singlePlatform.name} to={singlePlatform.slug}>
-              <h6>{singlePlatform.name}</h6>
-            </Link>
-          ))}
+        <Dropdown ref={wrapperRef}>
+          {platform
+            ?.map((singlePlatform) => (
+              <Link key={singlePlatform.name} to={singlePlatform.slug}>
+                <Item>{singlePlatform.name}</Item>
+              </Link>
+            ))
+            .reverse()}
         </Dropdown>
       )}
     </Wrapper>

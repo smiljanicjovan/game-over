@@ -5,7 +5,7 @@ import type { FC } from "react";
 import { useEffect, useState } from "react";
 
 // Global utils
-import { fetchItems } from "../../utils/fetchItems";
+import { fetchGames } from "../../utils/fetchItems";
 
 // Global types
 import { Game } from "../../types/game";
@@ -13,40 +13,48 @@ import { Game } from "../../types/game";
 // Vendors
 import styled, { css } from "styled-components";
 
-const Wrapper = styled.div`
-  ${({ theme: { defaults, colors, font, ...theme } }) => css``}
+// Local components
+import Trending from "./Trending";
+
+const Hero = styled.div<{ image: string }>`
+  height: 60vh;
+
+  ${({ image, theme: { defaults, colors, font, ...theme } }) => css`
+    background-image: url(${image});
+    background-position: top;
+    background-size: cover;
+  `}
+`;
+
+const Title = styled.h6`
+  position: absolute;
+  top: 50%;
+  left: 50%;
 `;
 
 interface Hometype {}
 
 const Home: FC<Hometype> = () => {
-  const [page, setPage] = useState(1);
   const [games, setGames] = useState<Game[]>();
 
   useEffect(() => {
     (async () => {
-      setGames(await fetchItems(page, "games"));
+      setGames(await fetchGames(1));
     })();
-  }, [page]);
+  }, []);
 
-  function nextPage() {
-    setPage(page + 1);
-  }
-
-  function previousPage() {
-    setPage(Math.max(1, page - 1));
-  }
+  games?.splice(1);
 
   return (
-    <Wrapper>
-      <>
-        <button onClick={previousPage}>Previous Page</button>
+    <>
+      {games?.map((game) => (
+        <Hero key={game.name} image={game.background_image}>
+          <Title>{game.name}</Title>
+        </Hero>
+      ))}
 
-        {/* {Array.isArray(games) && games.map((game) => console.log(game))} */}
-
-        <button onClick={nextPage}>Next Page</button>
-      </>
-    </Wrapper>
+      <Trending />
+    </>
   );
 };
 
